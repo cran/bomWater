@@ -47,20 +47,44 @@ Water Data Online.
 For the parameters (and their units) that can be requested, see
 \link{parameters}. More information can be found in the Water Data Online
 SOS manual (URL in See Also below).
+
+Common valid return fields are:
+\itemize{
+\item Timestamp
+\item Value
+\item Quality Code
+\item Interpolation Type
+}
+
+Other valid return fields (depending on the parameter requested) may be:
+\itemize{
+\item Absolute Value
+\item AV Interpolation
+\item AV Quality Code
+\item Runoff Value
+\item RV Interpolation
+\item RV Quality Code
+\item Aggregation
+\item Accuracy
+}
+
+If the request is not valid it will fail.
 }
 \examples{
 # Download annual rainfall for Cotter Hut
+\dontrun{
 get_yearly(
   parameter_type = "Rainfall",
   station_number = "570946",
   start_date = 2016,
   end_date = 2020
-)
+)}
+
 }
 \seealso{
 \itemize{
 \item \url{http://www.bom.gov.au/waterdata/}
-\item \url{http://www.bom.gov.au/waterdata/wiski-web-public/Guide\%20to\%20Sensor\%20Observation\%20Services\%20(SOS2)\%20for\%20Water\%20Data\%20\%20Online\%20v1.0.1.pdf}
+\item \href{http://www.bom.gov.au/waterdata/wiski-web-public/Guide\%20to\%20Sensor\%20Observation\%20Services\%20(SOS2)\%20for\%20Water\%20Data\%20\%20Online\%20v1.0.1.pdf}{BoM Guide to Sensor Observation Services (SOS2) for Water Data Online}
 }
 }
 \author{

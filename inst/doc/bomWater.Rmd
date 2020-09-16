@@ -14,11 +14,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(httptest)
+start_vignette("bomWater")
 ```
 
 ## Introduction
 
-`bomWater` provides an interface to the Australian Bureau of Meteorology Water Data online (http://bom.gov.au/waterdata/) web service. As part of the Water Act 2007, the BoM is required to collect Australian water information and make it available to the public. This provides a single and convenient source of water data for all states and territories. Several hydrological and meteorological quality checked timeseries are available through Water Data online and `bomWater` provides several functions to access these timeseries.
+`bomWater` provides an interface to the Australian Bureau of Meteorology Water Data online (http://www.bom.gov.au/waterdata/) web service. As part of the Water Act 2007, the BoM is required to collect Australian water information and make it available to the public. This provides a single and convenient source of water data for all states and territories. Several hydrological and meteorological quality checked timeseries are available through Water Data online and `bomWater` provides several functions to access these timeseries.
 
 ## Using bomWater
 
@@ -250,7 +252,7 @@ ggplot(berthong, aes(Timestamp, Value)) +
 
 ## Using get_as_stored()
 
-Retrieves timeseries as stored by the BoM. Results could vary.
+Retrieves timeseries as stored by the BoM. Stored frequency could vary substantially between different parameters and locations.
 
 ### Result
 
@@ -272,3 +274,7 @@ berthong
 ## Copyright
 
 The license and copyright for the data can be viewed under the copyright tab at http://www.bom.gov.au/waterdata/. More information about the Bureau of Meteorology copyright can be found at http://www.bom.gov.au/other/copyright.shtml.
+
+```{r, include=FALSE}
+end_vignette()
+```

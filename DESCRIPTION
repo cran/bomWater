@@ -1,7 +1,7 @@
 Package: bomWater
 Type: Package
 Title: Download Australian Bureau of Meteorology Water Data
-Version: 0.4.0
+Version: 0.4.1
 Author: Alexander Buzacott
 Maintainer: Alexander Buzacott <abuz5257@uni.sydney.edu.au>
 Description: An R interface to the Australian Bureau of Meteorology Water Data Online web service.
@@ -13,9 +13,9 @@ Depends: R (>= 3.5.0)
 Imports: dplyr (>= 0.8.5), tibble (>= 3.0.0), httr (>= 1.4.1), jsonlite
         (>= 1.6.1), lubridate (>= 1.7.4), stringr (>= 1.4.0)
 RoxygenNote: 7.1.1
-Suggests: knitr, rmarkdown, ggplot2, testthat
+Suggests: ggplot2, httptest, knitr, rmarkdown, testthat, curl
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2020-08-12 11:43:53 UTC; work
+Packaged: 2020-09-16 01:11:58 UTC; work
 Repository: CRAN
-Date/Publication: 2020-08-19 10:00:02 UTC
+Date/Publication: 2020-09-16 05:10:03 UTC

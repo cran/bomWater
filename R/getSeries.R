@@ -1,7 +1,28 @@
 #' @title Get time series
-#' @description `get_timeseries` Get timeseries data from Water Data online
+#' @md
+#' @description Get timeseries data from Water Data online
 #' @details This function can be used if you want to retrieve a specific
 #' timeseries that is not the default quality checked one.
+#'
+#' Common valid return fields are:
+#'
+#' * Timestamp
+#' * Value
+#' * Quality Code
+#' * Interpolation Type
+#'
+#' Other valid return fields (depending on the parameter requested) may be:
+#'
+#' * Absolute Value
+#' * AV Interpolation
+#' * AV Quality Code
+#' * Runoff Value
+#' * RV Interpolation
+#' * RV Quality Code
+#' * Aggregation
+#' * Accuracy
+#'
+#' If the request is not valid it will fail.
 #' @param parameter_type The water data parameter type (e.g. Water Course
 #' Discharge). See \code{\link{parameters()}} for a full list.
 #' @param station_number The AWRC station number.
@@ -23,9 +44,11 @@
 #' appropriate correct classes (this happens in other functions).
 #' @seealso
 #' * \url{http://www.bom.gov.au/waterdata/}
-#' * \url{http://www.bom.gov.au/waterdata/wiski-web-public/Guide\%20to\%20Sensor\%20Observation\%20Services\%20(SOS2)\%20for\%20Water\%20Data\%20\%20Online\%20v1.0.1.pdf}
+#' * [BoM Guide to Sensor Observation Services (SOS2) for Water Data Online](http://www.bom.gov.au/waterdata/wiski-web-public/Guide\%20to\%20Sensor\%20Observation\%20Services\%20(SOS2)\%20for\%20Water\%20Data\%20\%20Online\%20v1.0.1.pdf)
+#'
 #' @examples
 #' # Accessible dam storage, as shown on the BoM Water Storage dashboard
+#' \dontrun{
 #' get_timeseries(
 #'   parameter_type = "Storage Volume",
 #'   "G8150011",
@@ -33,8 +56,9 @@
 #'   "2020-01-31",
 #'   ts_name = "PR02AVQaQc.Merged.DailyMean.24HR",
 #'   tz = NULL,
-#'   return_fields = c("Timestamp", "Value", "Quality Code", "Interpolation Type")
+#'   return_fields = c("Timestamp", "Value", "Quality Code")
 #' )
+#' }
 #' # See the linked SOS2 manual in See Also to find more timeseries names
 #' @author Alexander Buzacott
 #' @export
@@ -94,22 +118,28 @@ get_timeseries <- function(parameter_type,
 
   # Only process data if it exists
   if (nrow(timeseries_values) > 0) {
-    # Get the tzone offset
-    if (is.null(tz)) {
-      tz_offset <- stringr::str_sub(timeseries_values$Timestamp[1], -5, -4)
-      # For some reason a negative offset is ahead of UTC
-      tz <- paste0("Etc/GMT-", tz_offset)
-    }
-    timeseries_values$Timestamp <-
-      lubridate::as_datetime(timeseries_values$Timestamp)
-    timeseries_values$Value <- as.numeric(timeseries_values$Value)
-    timeseries_values$`Quality Code` <-
-      as.integer(timeseries_values$`Quality Code`)
-    attributes(timeseries_values$Timestamp)$tzone <- tz
-    # Check for interpolation type
-    if ("Interpolation Type" %in% colnames(timeseries_values)) {
-      timeseries_values$`Interpolation Type` <-
-        as.integer(timeseries_values$`Interpolation Type`)
+    if ("Timestamp" %in% colnames(timeseries_values)) {
+      # Get the tzone offset
+      if (is.null(tz)) {
+        tz_offset <- stringr::str_sub(timeseries_values$Timestamp[1], -5, -4)
+        # For some reason a negative offset is ahead of UTC
+        tz <- paste0("Etc/GMT-", tz_offset)
+      }
+      # nolint start
+      timeseries_values$Timestamp <-
+        lubridate::as_datetime(timeseries_values$Timestamp)
+      attributes(timeseries_values$Timestamp)$tzone <- tz
+      timeseries_values <- dplyr::mutate_at(timeseries_values,
+        dplyr::vars(-"Timestamp"),
+        utils::type.convert,
+        as.is = TRUE
+      )
+      # nolint end
+    } else {
+      timeseries_values <- dplyr::mutate_all(timeseries_values,
+        utils::type.convert,
+        as.is = TRUE
+      )
     }
   }
 
@@ -120,17 +150,20 @@ get_timeseries <- function(parameter_type,
 #' @examples
 #' # Groundwater level as stored by the BoM
 #' # PLUMB RD @ NARRABRI'
+#' \dontrun{
 #' get_as_stored(
 #'   parameter_type = "Ground Water Level",
 #'   station_number = "GW971623.3.3",
 #'   start_date = "2020-03-01",
 #'   end_date = "2020-03-01"
 #' )
+#' }
 #' @export
 get_as_stored <- function(parameter_type,
                           station_number,
                           start_date,
-                          end_date, tz,
+                          end_date,
+                          tz,
                           return_fields) {
   parameter_type <-
     parameters()[tolower(parameter_type) == tolower(parameters())]
@@ -141,7 +174,7 @@ get_as_stored <- function(parameter_type,
   if (missing(tz)) tz <- NULL
 
   if (missing(return_fields)) {
-    return_fields <- "Timestamp,Value,Quality Code"
+    return_fields <- c("Timestamp", "Value", "Quality Code")
   }
 
   timeseries_values <- get_timeseries(
@@ -160,12 +193,14 @@ get_as_stored <- function(parameter_type,
 #' @template timeseriesDocs
 #' @examples
 #' # Hourly streamflow Cotter River at Gingera Gauge
+#' \dontrun{
 #' get_hourly(
 #'   parameter_type = "Water Course Discharge",
 #'   station_number = "410730",
 #'   start_date = "2020-01-01",
 #'   end_date = "2020-01-31"
 #' )
+#' }
 #' @export
 get_hourly <- function(parameter_type,
                        station_number,
@@ -188,7 +223,9 @@ get_hourly <- function(parameter_type,
   }
 
   if (missing(tz)) tz <- NULL
-  if (missing(return_fields)) return_fields <- "Timestamp,Value,Quality Code"
+  if (missing(return_fields)) {
+    return_fields <- c("Timestamp", "Value", "Quality Code")
+  }
 
   timeseries_values <- get_timeseries(
     parameter_type,
@@ -212,6 +249,7 @@ get_hourly <- function(parameter_type,
 #' is only available for mean discharge and total rainfall and evaporation.
 #' @examples
 #' # Download daily mean aggregated over the standard day
+#' \dontrun{
 #' get_daily(
 #'   parameter_type = "Water Course Discharge",
 #'   station_number = "410730",
@@ -219,8 +257,10 @@ get_hourly <- function(parameter_type,
 #'   end_date = "2020-01-31",
 #'   var = "mean",
 #'   aggregation = "24HR"
-#' )
+#' )}
+#'
 #' # Download daily mean aggregated between 9am to 9am
+#' \dontrun{
 #' get_daily(
 #'   parameter_type = "Water Course Discharge",
 #'   station_number = "410730",
@@ -228,9 +268,10 @@ get_hourly <- function(parameter_type,
 #'   end_date = "2020-01-31",
 #'   var = "mean",
 #'   aggregation = "09HR"
-#' )
+#' )}
 #'
 #' # Download the daily max over the standard day
+#' \dontrun{
 #' get_daily(
 #'   parameter_type = "Water Course Discharge",
 #'   station_number = "410730",
@@ -238,7 +279,8 @@ get_hourly <- function(parameter_type,
 #'   end_date = "2020-01-31",
 #'   var = "max",
 #'   aggregation = "24HR"
-#' )
+#' )}
+#'
 #' @export
 get_daily <- function(parameter_type,
                       station_number,
@@ -299,8 +341,9 @@ get_daily <- function(parameter_type,
 
   if (missing(tz)) tz <- NULL
 
-  if (missing(return_fields)) return_fields <- "Timestamp,Value,Quality Code"
-
+  if (missing(return_fields)) {
+    return_fields <- c("Timestamp", "Value", "Quality Code")
+  }
 
   timeseries_values <- get_timeseries(
     parameter_type,
@@ -318,12 +361,13 @@ get_daily <- function(parameter_type,
 #' @template timeseriesDocs
 #' @examples
 #' # Monthly average dry air temperature at Corin Dam
+#' \dontrun{
 #' get_monthly(
 #'   parameter_type = "Dry Air Temperature",
 #'   station_number = "570947",
 #'   start_date = "2016-01-01",
 #'   end_date = "2016-06-01"
-#' )
+#' )}
 #' @export
 get_monthly <- function(parameter_type,
                         station_number,
@@ -349,7 +393,9 @@ get_monthly <- function(parameter_type,
 
   if (missing(tz)) tz <- NULL
 
-  if (missing(return_fields)) return_fields <- "Timestamp,Value,Quality Code"
+  if (missing(return_fields)) {
+    return_fields <- c("Timestamp", "Value", "Quality Code")
+  }
 
   timeseries_values <- get_timeseries(
     parameter_type,
@@ -370,12 +416,14 @@ get_monthly <- function(parameter_type,
 #' @param end_date End date (formatted as YYYY-MM-DD) or just the year (YYYY)
 #' @examples
 #' # Download annual rainfall for Cotter Hut
+#' \dontrun{
 #' get_yearly(
 #'   parameter_type = "Rainfall",
 #'   station_number = "570946",
 #'   start_date = 2016,
 #'   end_date = 2020
-#' )
+#' )}
+#'
 #' @export
 get_yearly <- function(parameter_type,
                        station_number,
@@ -404,7 +452,9 @@ get_yearly <- function(parameter_type,
 
   if (missing(tz)) tz <- NULL
 
-  if (missing(return_fields)) return_fields <- "Timestamp,Value,Quality Code"
+  if (missing(return_fields)) {
+    return_fields <- c("Timestamp", "Value", "Quality Code")
+  }
 
   timeseries_values <- get_timeseries(
     parameter_type,
@@ -449,7 +499,7 @@ get_yearly <- function(parameter_type,
 #' @md
 #' @seealso
 #' * \url{http://www.bom.gov.au/waterdata/}
-#' * \url{http://www.bom.gov.au/waterdata/wiski-web-public/Guide\%20to\%20Sensor\%20Observation\%20Services\%20(SOS2)\%20for\%20Water\%20Data\%20\%20Online\%20v1.0.1.pdf}
+#' * [BoM Guide to Sensor Observation Services (SOS2) for Water Data Online](http://www.bom.gov.au/waterdata/wiski-web-public/Guide\%20to\%20Sensor\%20Observation\%20Services\%20(SOS2)\%20for\%20Water\%20Data\%20\%20Online\%20v1.0.1.pdf)
 #' @author Alexander Buzacott
 #' @examples
 #' parameters()

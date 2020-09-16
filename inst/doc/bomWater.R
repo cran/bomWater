@@ -3,6 +3,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(httptest)
+start_vignette("bomWater")
 
 ## ----setup--------------------------------------------------------------------
 library(bomWater)
@@ -122,4 +124,7 @@ berthong <- get_as_stored(
   end_date       = "2019-12-31"
 )
 berthong
+
+## ---- include=FALSE-----------------------------------------------------------
+end_vignette()
 

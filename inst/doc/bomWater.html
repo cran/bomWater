@@ -12,7 +12,7 @@
 
 <meta name="author" content="Alexander Buzacott" />
 
-<meta name="date" content="2020-08-12" />
+<meta name="date" content="2020-09-16" />
 
 <title>bomWater</title>
 
@@ -319,13 +319,13 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">bomWater</h1>
 <h4 class="author">Alexander Buzacott</h4>
-<h4 class="date">2020-08-12</h4>
+<h4 class="date">2020-09-16</h4>
 
 
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p><code>bomWater</code> provides an interface to the Australian Bureau of Meteorology Water Data online (<a href="http://bom.gov.au/waterdata/" class="uri">http://bom.gov.au/waterdata/</a>) web service. As part of the Water Act 2007, the BoM is required to collect Australian water information and make it available to the public. This provides a single and convenient source of water data for all states and territories. Several hydrological and meteorological quality checked timeseries are available through Water Data online and <code>bomWater</code> provides several functions to access these timeseries.</p>
+<p><code>bomWater</code> provides an interface to the Australian Bureau of Meteorology Water Data online (<a href="http://www.bom.gov.au/waterdata/" class="uri">http://www.bom.gov.au/waterdata/</a>) web service. As part of the Water Act 2007, the BoM is required to collect Australian water information and make it available to the public. This provides a single and convenient source of water data for all states and territories. Several hydrological and meteorological quality checked timeseries are available through Water Data online and <code>bomWater</code> provides several functions to access these timeseries.</p>
 </div>
 <div id="using-bomwater" class="section level2">
 <h2>Using bomWater</h2>
@@ -490,27 +490,29 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <h3>Example</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Get a list of groundwater bores available from water data online</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">get_station_list</span>(<span class="dt">parameter_type =</span> <span class="st">&quot;Ground Water Level&quot;</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; # A tibble: 4,439 x 5</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;    station_name station_no station_id station_latitude station_longitude</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            </span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  1 01/DD01 D    60930131   387998     -33.21743524     117.80645139     </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  2 01/DD01 OB   60930132   388003     -33.217408183    117.806451142    </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  3 01/DD04 S    60930135   388008     -33.217376694    117.805742621    </span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  4 02/DD25 OB   60930141   388013     -33.218110097    117.803914363    </span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  5 02/DD26 OB   60930142   388018     -33.218521858    117.80440102     </span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  6 02/DD27 OB   60930143   388023     -33.218898026    117.80481224     </span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  7 02/DD28 OB   60930144   388028     -33.219219939    117.805244428    </span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;  8 02/DD29 OB   60930145   388033     -33.219443056    117.805611327    </span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  9 02/DD30 OB   60930146   388038     -33.219785507    117.80565739     </span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; 10 02/DD31 OB   60930147   388043     -33.220099232    117.805960737    </span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; # … with 4,429 more rows</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co"># Return information for a single station and customise return fields</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="kw">get_station_list</span>(<span class="dt">station_number =</span> <span class="st">&quot;410730&quot;</span>)</span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; # A tibble: 1 x 5</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt;   station_name         station_no station_id station_latitude station_longitude</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt;   &lt;chr&gt;                &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;            </span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; 1 Cotter R. at Gingera 410730     13360      -35.58805556     148.82191667</span></span></code></pre></div>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; # A tibble: 4,440 x 5</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;    station_name station_no station_id station_latitude station_longitude</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;           &lt;int&gt;            &lt;dbl&gt;             &lt;dbl&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  1 01/DD01 D    60930131       387998            -33.2              118.</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  2 01/DD01 OB   60930132       388003            -33.2              118.</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  3 01/DD04 S    60930135       388008            -33.2              118.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  4 02/DD25 OB   60930141       388013            -33.2              118.</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  5 02/DD26 OB   60930142       388018            -33.2              118.</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  6 02/DD27 OB   60930143       388023            -33.2              118.</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;  7 02/DD28 OB   60930144       388028            -33.2              118.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  8 02/DD29 OB   60930145       388033            -33.2              118.</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;  9 02/DD30 OB   60930146       388038            -33.2              118.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; 10 02/DD31 OB   60930147       388043            -33.2              118.</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; # … with 4,430 more rows</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co"># Return information for a single station and customise return fields</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="kw">get_station_list</span>(<span class="dt">station_number =</span> <span class="st">&quot;410730&quot;</span>)</span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; # A tibble: 1 x 5</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt;   station_name         station_no station_id station_latitude station_longitude</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt;   &lt;chr&gt;                     &lt;int&gt;      &lt;int&gt;            &lt;dbl&gt;             &lt;dbl&gt;</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; 1 Cotter R. at Gingera     410730      13360            -35.6              149.</span></span></code></pre></div>
 </div>
 </div>
 <div id="using-get_hourly" class="section level2">
@@ -529,42 +531,48 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb4-5"><a href="#cb4-5"></a>  <span class="dt">start_date =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
 <span id="cb4-6"><a href="#cb4-6"></a>  <span class="dt">end_date =</span> <span class="st">&quot;2020-01-31&quot;</span></span>
 <span id="cb4-7"><a href="#cb4-7"></a>)</span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; # A tibble: 744 x 3</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt;  1 2020-01-01 00:00:00 0.013             10</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt;  2 2020-01-01 01:00:00 0.013             10</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt;  3 2020-01-01 02:00:00 0.014             10</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;  4 2020-01-01 03:00:00 0.014             10</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;  5 2020-01-01 04:00:00 0.014             10</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt;  6 2020-01-01 05:00:00 0.014             10</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt;  7 2020-01-01 06:00:00 0.014             10</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt;  8 2020-01-01 07:00:00 0.014             10</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt;  9 2020-01-01 08:00:00 0.015             10</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; 10 2020-01-01 09:00:00 0.015             10</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; # … with 734 more rows</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co"># Corin Reservoir</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="kw">get_hourly</span>(</span>
-<span id="cb4-25"><a href="#cb4-25"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Storage Volume&quot;</span>,</span>
-<span id="cb4-26"><a href="#cb4-26"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410742&quot;</span>,</span>
-<span id="cb4-27"><a href="#cb4-27"></a>  <span class="dt">start_date =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
-<span id="cb4-28"><a href="#cb4-28"></a>  <span class="dt">end_date =</span> <span class="st">&quot;2020-01-31&quot;</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a>)</span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; # A tibble: 744 x 3</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt;    Timestamp            Value `Quality Code`</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;    &lt;dttm&gt;               &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;  1 2020-01-01 00:00:00 13109.             10</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt;  2 2020-01-01 01:00:00 13108.             10</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt;  3 2020-01-01 02:00:00 13108.             10</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt;  4 2020-01-01 03:00:00 13107.             10</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;  5 2020-01-01 04:00:00 13107.             10</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;  6 2020-01-01 05:00:00 13106.             10</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;  7 2020-01-01 06:00:00 13105.             10</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;  8 2020-01-01 07:00:00 13104.             10</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;  9 2020-01-01 08:00:00 13103.             10</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt; 10 2020-01-01 09:00:00 13102.             10</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt; # … with 734 more rows</span></span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; # A tibble: 744 x 3</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;  1 2020-01-01 00:00:00 0.013             10</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt;  2 2020-01-01 01:00:00 0.013             10</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt;  3 2020-01-01 02:00:00 0.014             10</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt;  4 2020-01-01 03:00:00 0.014             10</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt;  5 2020-01-01 04:00:00 0.014             10</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt;  6 2020-01-01 05:00:00 0.014             10</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt;  7 2020-01-01 06:00:00 0.014             10</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt;  8 2020-01-01 07:00:00 0.014             10</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt;  9 2020-01-01 08:00:00 0.015             10</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; 10 2020-01-01 09:00:00 0.015             10</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; # … with 734 more rows</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a></span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="co"># Corin Reservoir</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="kw">get_hourly</span>(</span>
+<span id="cb4-28"><a href="#cb4-28"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Storage Volume&quot;</span>,</span>
+<span id="cb4-29"><a href="#cb4-29"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410742&quot;</span>,</span>
+<span id="cb4-30"><a href="#cb4-30"></a>  <span class="dt">start_date =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
+<span id="cb4-31"><a href="#cb4-31"></a>  <span class="dt">end_date =</span> <span class="st">&quot;2020-01-31&quot;</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a>)</span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; # A tibble: 744 x 3</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;    Timestamp            Value `Quality Code`</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;    &lt;dttm&gt;               &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt;  1 2020-01-01 00:00:00 13109.             10</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt;  2 2020-01-01 01:00:00 13108.             10</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt;  3 2020-01-01 02:00:00 13108.             10</span></span>
+<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt;  4 2020-01-01 03:00:00 13107.             10</span></span>
+<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt;  5 2020-01-01 04:00:00 13107.             10</span></span>
+<span id="cb4-44"><a href="#cb4-44"></a><span class="co">#&gt;  6 2020-01-01 05:00:00 13106.             10</span></span>
+<span id="cb4-45"><a href="#cb4-45"></a><span class="co">#&gt;  7 2020-01-01 06:00:00 13105.             10</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a><span class="co">#&gt;  8 2020-01-01 07:00:00 13104.             10</span></span>
+<span id="cb4-47"><a href="#cb4-47"></a><span class="co">#&gt;  9 2020-01-01 08:00:00 13103.             10</span></span>
+<span id="cb4-48"><a href="#cb4-48"></a><span class="co">#&gt; 10 2020-01-01 09:00:00 13102.             10</span></span>
+<span id="cb4-49"><a href="#cb4-49"></a><span class="co">#&gt; # … with 734 more rows</span></span></code></pre></div>
 <p>An example of plotting the data:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>corin &lt;-<span class="st"> </span><span class="kw">get_hourly</span>(</span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Storage Volume&quot;</span>,</span>
@@ -572,9 +580,12 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb5-4"><a href="#cb5-4"></a>  <span class="dt">start_date =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
 <span id="cb5-5"><a href="#cb5-5"></a>  <span class="dt">end_date =</span> <span class="st">&quot;2020-01-31&quot;</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a>)</span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">ggplot</span>(corin, <span class="kw">aes</span>(Timestamp, Value)) <span class="op">+</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Storage Volume (ML)&quot;</span>)</span></code></pre></div>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="kw">ggplot</span>(corin, <span class="kw">aes</span>(Timestamp, Value)) <span class="op">+</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Storage Volume (ML)&quot;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 </div>
@@ -595,65 +606,74 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb6-6"><a href="#cb6-6"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2020-01-31&quot;</span>,</span>
 <span id="cb6-7"><a href="#cb6-7"></a>  <span class="dt">aggregation    =</span> <span class="st">&quot;09HR&quot;</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a>)</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; # A tibble: 31 x 3</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;  1 2020-01-01 09:00:00 0.014             10</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;  2 2020-01-02 09:00:00 0.013             10</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;  3 2020-01-03 09:00:00 0.013             10</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt;  4 2020-01-04 09:00:00 0.01              10</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;  5 2020-01-05 09:00:00 0.008             10</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt;  6 2020-01-06 09:00:00 0.012             10</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt;  7 2020-01-07 09:00:00 0.019             10</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt;  8 2020-01-08 09:00:00 0.021             10</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt;  9 2020-01-09 09:00:00 0.018             10</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; 10 2020-01-10 09:00:00 0.016             10</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; # … with 21 more rows</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a></span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="co"># Daily max, only available over the standard day</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="kw">get_daily</span>(</span>
-<span id="cb6-26"><a href="#cb6-26"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Water Course Discharge&quot;</span>,</span>
-<span id="cb6-27"><a href="#cb6-27"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410730&quot;</span>,</span>
-<span id="cb6-28"><a href="#cb6-28"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
-<span id="cb6-29"><a href="#cb6-29"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2020-01-31&quot;</span>,</span>
-<span id="cb6-30"><a href="#cb6-30"></a>  <span class="dt">var            =</span> <span class="st">&quot;max&quot;</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a>)</span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; # A tibble: 31 x 3</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt;  1 2020-01-01 00:00:00 0.015             10</span></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt;  2 2020-01-02 00:00:00 0.014             10</span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt;  3 2020-01-03 00:00:00 0.013             10</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt;  4 2020-01-04 00:00:00 0.01              10</span></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt;  5 2020-01-05 00:00:00 0.012             10</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt;  6 2020-01-06 00:00:00 0.02              10</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt;  7 2020-01-07 00:00:00 0.026             10</span></span>
-<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt;  8 2020-01-08 00:00:00 0.019             10</span></span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt;  9 2020-01-09 00:00:00 0.018             10</span></span>
-<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt; 10 2020-01-10 00:00:00 0.016             10</span></span>
-<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt; # … with 21 more rows</span></span>
-<span id="cb6-46"><a href="#cb6-46"></a></span>
-<span id="cb6-47"><a href="#cb6-47"></a><span class="co"># Daily mean wind speed at Corin Dam</span></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="kw">get_daily</span>(</span>
-<span id="cb6-49"><a href="#cb6-49"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Wind Speed&quot;</span>,</span>
-<span id="cb6-50"><a href="#cb6-50"></a>  <span class="dt">station_number =</span> <span class="st">&quot;570947&quot;</span>,</span>
-<span id="cb6-51"><a href="#cb6-51"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
-<span id="cb6-52"><a href="#cb6-52"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2020-01-31&quot;</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a>)</span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="co">#&gt; # A tibble: 31 x 3</span></span>
-<span id="cb6-55"><a href="#cb6-55"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb6-56"><a href="#cb6-56"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb6-57"><a href="#cb6-57"></a><span class="co">#&gt;  1 2020-01-01 00:00:00  4.9              10</span></span>
-<span id="cb6-58"><a href="#cb6-58"></a><span class="co">#&gt;  2 2020-01-02 00:00:00  4.07             10</span></span>
-<span id="cb6-59"><a href="#cb6-59"></a><span class="co">#&gt;  3 2020-01-03 00:00:00  4.43             10</span></span>
-<span id="cb6-60"><a href="#cb6-60"></a><span class="co">#&gt;  4 2020-01-04 00:00:00  7.43             10</span></span>
-<span id="cb6-61"><a href="#cb6-61"></a><span class="co">#&gt;  5 2020-01-05 00:00:00  5.66             10</span></span>
-<span id="cb6-62"><a href="#cb6-62"></a><span class="co">#&gt;  6 2020-01-06 00:00:00  2.87             10</span></span>
-<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#&gt;  7 2020-01-07 00:00:00  5.95             10</span></span>
-<span id="cb6-64"><a href="#cb6-64"></a><span class="co">#&gt;  8 2020-01-08 00:00:00  5.65             10</span></span>
-<span id="cb6-65"><a href="#cb6-65"></a><span class="co">#&gt;  9 2020-01-09 00:00:00  5.3              10</span></span>
-<span id="cb6-66"><a href="#cb6-66"></a><span class="co">#&gt; 10 2020-01-10 00:00:00  5.89             10</span></span>
-<span id="cb6-67"><a href="#cb6-67"></a><span class="co">#&gt; # … with 21 more rows</span></span></code></pre></div>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; # A tibble: 31 x 3</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt;  1 2020-01-01 09:00:00 0.014             10</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;  2 2020-01-02 09:00:00 0.013             10</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt;  3 2020-01-03 09:00:00 0.013             10</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt;  4 2020-01-04 09:00:00 0.01              10</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt;  5 2020-01-05 09:00:00 0.008             10</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt;  6 2020-01-06 09:00:00 0.012             10</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt;  7 2020-01-07 09:00:00 0.019             10</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt;  8 2020-01-08 09:00:00 0.021             10</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt;  9 2020-01-09 09:00:00 0.018             10</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; 10 2020-01-10 09:00:00 0.016             10</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; # … with 21 more rows</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co"># Daily max, only available over the standard day</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="kw">get_daily</span>(</span>
+<span id="cb6-29"><a href="#cb6-29"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Water Course Discharge&quot;</span>,</span>
+<span id="cb6-30"><a href="#cb6-30"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410730&quot;</span>,</span>
+<span id="cb6-31"><a href="#cb6-31"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
+<span id="cb6-32"><a href="#cb6-32"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2020-01-31&quot;</span>,</span>
+<span id="cb6-33"><a href="#cb6-33"></a>  <span class="dt">var            =</span> <span class="st">&quot;max&quot;</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a>)</span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; # A tibble: 31 x 3</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt;  1 2020-01-01 00:00:00 0.015             10</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt;  2 2020-01-02 00:00:00 0.014             10</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt;  3 2020-01-03 00:00:00 0.013             10</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt;  4 2020-01-04 00:00:00 0.01              10</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt;  5 2020-01-05 00:00:00 0.012             10</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co">#&gt;  6 2020-01-06 00:00:00 0.02              10</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="co">#&gt;  7 2020-01-07 00:00:00 0.026             10</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="co">#&gt;  8 2020-01-08 00:00:00 0.019             10</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co">#&gt;  9 2020-01-09 00:00:00 0.018             10</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="co">#&gt; 10 2020-01-10 00:00:00 0.016             10</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="co">#&gt; # … with 21 more rows</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co"># Daily mean wind speed at Corin Dam</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="kw">get_daily</span>(</span>
+<span id="cb6-55"><a href="#cb6-55"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Wind Speed&quot;</span>,</span>
+<span id="cb6-56"><a href="#cb6-56"></a>  <span class="dt">station_number =</span> <span class="st">&quot;570947&quot;</span>,</span>
+<span id="cb6-57"><a href="#cb6-57"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2020-01-01&quot;</span>,</span>
+<span id="cb6-58"><a href="#cb6-58"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2020-01-31&quot;</span></span>
+<span id="cb6-59"><a href="#cb6-59"></a>)</span>
+<span id="cb6-60"><a href="#cb6-60"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-61"><a href="#cb6-61"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-62"><a href="#cb6-62"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#&gt; # A tibble: 31 x 3</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb6-66"><a href="#cb6-66"></a><span class="co">#&gt;  1 2020-01-01 00:00:00  4.9              10</span></span>
+<span id="cb6-67"><a href="#cb6-67"></a><span class="co">#&gt;  2 2020-01-02 00:00:00  4.07             10</span></span>
+<span id="cb6-68"><a href="#cb6-68"></a><span class="co">#&gt;  3 2020-01-03 00:00:00  4.43             10</span></span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="co">#&gt;  4 2020-01-04 00:00:00  7.43             10</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a><span class="co">#&gt;  5 2020-01-05 00:00:00  5.66             10</span></span>
+<span id="cb6-71"><a href="#cb6-71"></a><span class="co">#&gt;  6 2020-01-06 00:00:00  2.87             10</span></span>
+<span id="cb6-72"><a href="#cb6-72"></a><span class="co">#&gt;  7 2020-01-07 00:00:00  5.95             10</span></span>
+<span id="cb6-73"><a href="#cb6-73"></a><span class="co">#&gt;  8 2020-01-08 00:00:00  5.65             10</span></span>
+<span id="cb6-74"><a href="#cb6-74"></a><span class="co">#&gt;  9 2020-01-09 00:00:00  5.3              10</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="co">#&gt; 10 2020-01-10 00:00:00  5.89             10</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="co">#&gt; # … with 21 more rows</span></span></code></pre></div>
 </div>
 </div>
 <div id="using-get_monthly" class="section level2">
@@ -672,55 +692,64 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb7-5"><a href="#cb7-5"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2019-01-01&quot;</span>,</span>
 <span id="cb7-6"><a href="#cb7-6"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
 <span id="cb7-7"><a href="#cb7-7"></a>)</span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; # A tibble: 12 x 3</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;  1 2019-01-01 00:00:00  57.2             10</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt;  2 2019-02-01 00:00:00  23.2             10</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;  3 2019-03-01 00:00:00  89.2             10</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;  4 2019-04-01 00:00:00  11.2             10</span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;  5 2019-05-01 00:00:00 111.              10</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt;  6 2019-06-01 00:00:00  44.8             10</span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt;  7 2019-07-01 00:00:00  38               10</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt;  8 2019-08-01 00:00:00  50.8             10</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt;  9 2019-09-01 00:00:00  50.8             10</span></span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt; 10 2019-10-01 00:00:00  53.6             10</span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; 11 2019-11-01 00:00:00  41.2             10</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; 12 2019-12-01 00:00:00   8               10</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co"># Monthly mean streamflow rate m3/s at Cotter River at Gingera</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="kw">get_monthly</span>(</span>
-<span id="cb7-26"><a href="#cb7-26"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Water Course Discharge&quot;</span>,</span>
-<span id="cb7-27"><a href="#cb7-27"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410730&quot;</span>,</span>
-<span id="cb7-28"><a href="#cb7-28"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2019-01-01&quot;</span>,</span>
-<span id="cb7-29"><a href="#cb7-29"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
-<span id="cb7-30"><a href="#cb7-30"></a>)</span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; # A tibble: 12 x 3</span></span>
-<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt;  1 2019-01-01 00:00:00 0.188             10</span></span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt;  2 2019-02-01 00:00:00 0.08              10</span></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt;  3 2019-03-01 00:00:00 0.094             10</span></span>
-<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt;  4 2019-04-01 00:00:00 0.086             10</span></span>
-<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt;  5 2019-05-01 00:00:00 0.18              10</span></span>
-<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt;  6 2019-06-01 00:00:00 0.237             10</span></span>
-<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt;  7 2019-07-01 00:00:00 0.283             10</span></span>
-<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt;  8 2019-08-01 00:00:00 0.378             10</span></span>
-<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt;  9 2019-09-01 00:00:00 0.409             10</span></span>
-<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; 10 2019-10-01 00:00:00 0.285             10</span></span>
-<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt; 11 2019-11-01 00:00:00 0.18              10</span></span>
-<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; 12 2019-12-01 00:00:00 0.054             10</span></span>
-<span id="cb7-46"><a href="#cb7-46"></a></span>
-<span id="cb7-47"><a href="#cb7-47"></a><span class="co"># Monthly evaporation at Blowering Dam</span></span>
-<span id="cb7-48"><a href="#cb7-48"></a><span class="kw">get_monthly</span>(</span>
-<span id="cb7-49"><a href="#cb7-49"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Evaporation&quot;</span>,</span>
-<span id="cb7-50"><a href="#cb7-50"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410102&quot;</span>,</span>
-<span id="cb7-51"><a href="#cb7-51"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2019-01-01&quot;</span>,</span>
-<span id="cb7-52"><a href="#cb7-52"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
-<span id="cb7-53"><a href="#cb7-53"></a>)</span>
-<span id="cb7-54"><a href="#cb7-54"></a><span class="co">#&gt; # A tibble: 0 x 3</span></span>
-<span id="cb7-55"><a href="#cb7-55"></a><span class="co">#&gt; # … with 3 variables: Timestamp &lt;chr&gt;, Value &lt;chr&gt;, `Quality Code` &lt;chr&gt;</span></span>
-<span id="cb7-56"><a href="#cb7-56"></a><span class="co"># No data</span></span></code></pre></div>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; # A tibble: 12 x 3</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;  1 2019-01-01 00:00:00  57.2             10</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;  2 2019-02-01 00:00:00  23.2             10</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt;  3 2019-03-01 00:00:00  89.2             10</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt;  4 2019-04-01 00:00:00  11.2             10</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt;  5 2019-05-01 00:00:00 111.              10</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt;  6 2019-06-01 00:00:00  44.8             10</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt;  7 2019-07-01 00:00:00  38               10</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt;  8 2019-08-01 00:00:00  50.8             10</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt;  9 2019-09-01 00:00:00  50.8             10</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; 10 2019-10-01 00:00:00  53.6             10</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; 11 2019-11-01 00:00:00  41.2             10</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; 12 2019-12-01 00:00:00   8               10</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co"># Monthly mean streamflow rate m3/s at Cotter River at Gingera</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="kw">get_monthly</span>(</span>
+<span id="cb7-29"><a href="#cb7-29"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Water Course Discharge&quot;</span>,</span>
+<span id="cb7-30"><a href="#cb7-30"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410730&quot;</span>,</span>
+<span id="cb7-31"><a href="#cb7-31"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2019-01-01&quot;</span>,</span>
+<span id="cb7-32"><a href="#cb7-32"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a>)</span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; # A tibble: 12 x 3</span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt;  1 2019-01-01 00:00:00 0.188             10</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt;  2 2019-02-01 00:00:00 0.08              10</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt;  3 2019-03-01 00:00:00 0.094             10</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt;  4 2019-04-01 00:00:00 0.086             10</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt;  5 2019-05-01 00:00:00 0.18              10</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt;  6 2019-06-01 00:00:00 0.237             10</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt;  7 2019-07-01 00:00:00 0.283             10</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt;  8 2019-08-01 00:00:00 0.378             10</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="co">#&gt;  9 2019-09-01 00:00:00 0.409             10</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co">#&gt; 10 2019-10-01 00:00:00 0.285             10</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="co">#&gt; 11 2019-11-01 00:00:00 0.18              10</span></span>
+<span id="cb7-51"><a href="#cb7-51"></a><span class="co">#&gt; 12 2019-12-01 00:00:00 0.054             10</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a></span>
+<span id="cb7-53"><a href="#cb7-53"></a><span class="co"># Monthly evaporation at Blowering Dam</span></span>
+<span id="cb7-54"><a href="#cb7-54"></a><span class="kw">get_monthly</span>(</span>
+<span id="cb7-55"><a href="#cb7-55"></a>  <span class="dt">parameter_type =</span> <span class="st">&quot;Evaporation&quot;</span>,</span>
+<span id="cb7-56"><a href="#cb7-56"></a>  <span class="dt">station_number =</span> <span class="st">&quot;410102&quot;</span>,</span>
+<span id="cb7-57"><a href="#cb7-57"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2019-01-01&quot;</span>,</span>
+<span id="cb7-58"><a href="#cb7-58"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
+<span id="cb7-59"><a href="#cb7-59"></a>)</span>
+<span id="cb7-60"><a href="#cb7-60"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-61"><a href="#cb7-61"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-62"><a href="#cb7-62"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb7-63"><a href="#cb7-63"></a><span class="co">#&gt; # A tibble: 0 x 3</span></span>
+<span id="cb7-64"><a href="#cb7-64"></a><span class="co">#&gt; # … with 3 variables: Timestamp &lt;chr&gt;, Value &lt;chr&gt;, `Quality Code` &lt;chr&gt;</span></span>
+<span id="cb7-65"><a href="#cb7-65"></a><span class="co"># No data</span></span></code></pre></div>
 </div>
 </div>
 <div id="using-get_yearly" class="section level2">
@@ -739,17 +768,20 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb8-5"><a href="#cb8-5"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2010-01-01&quot;</span>,</span>
 <span id="cb8-6"><a href="#cb8-6"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a>)</span>
-<span id="cb8-8"><a href="#cb8-8"></a></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co"># Example plot</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="kw">ggplot</span>(berthong, <span class="kw">aes</span>(Timestamp, Value)) <span class="op">+</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Rainfall (mm/year)&quot;</span>)</span></code></pre></div>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co"># Example plot</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="kw">ggplot</span>(berthong, <span class="kw">aes</span>(Timestamp, Value)) <span class="op">+</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Time&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Rainfall (mm/year)&quot;</span>)</span></code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
 </div>
 </div>
 <div id="using-get_as_stored" class="section level2">
 <h2>Using get_as_stored()</h2>
-<p>Retrieves timeseries as stored by the BoM. Results could vary.</p>
+<p>Retrieves timeseries as stored by the BoM. Stored frequency could vary substantially between different parameters and locations.</p>
 <div id="result-4" class="section level3">
 <h3>Result</h3>
 <p>A tibble with columns Timestamp, Value and Quality Code.</p>
@@ -763,21 +795,24 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <span id="cb9-5"><a href="#cb9-5"></a>  <span class="dt">start_date     =</span> <span class="st">&quot;2019-01-01&quot;</span>,</span>
 <span id="cb9-6"><a href="#cb9-6"></a>  <span class="dt">end_date       =</span> <span class="st">&quot;2019-12-31&quot;</span></span>
 <span id="cb9-7"><a href="#cb9-7"></a>)</span>
-<span id="cb9-8"><a href="#cb9-8"></a>berthong</span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; # A tibble: 9,896 x 3</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;  1 2019-01-01 00:00:00     0            140</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;  2 2019-01-01 01:00:00     0            140</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;  3 2019-01-01 02:00:00     0            140</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;  4 2019-01-01 03:00:00     0            140</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt;  5 2019-01-01 04:00:00     0            140</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt;  6 2019-01-01 05:00:00     0            140</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt;  7 2019-01-01 06:00:00     0            140</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt;  8 2019-01-01 07:00:00     0            140</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt;  9 2019-01-01 08:00:00     0            140</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; 10 2019-01-01 09:00:00     0            140</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt; # … with 9,886 more rows</span></span></code></pre></div>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; No encoding supplied: defaulting to UTF-8.</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>berthong</span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; # A tibble: 9,896 x 3</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;    Timestamp           Value `Quality Code`</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;    &lt;dttm&gt;              &lt;dbl&gt;          &lt;int&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;  1 2019-01-01 00:00:00     0            140</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt;  2 2019-01-01 01:00:00     0            140</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt;  3 2019-01-01 02:00:00     0            140</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt;  4 2019-01-01 03:00:00     0            140</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt;  5 2019-01-01 04:00:00     0            140</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt;  6 2019-01-01 05:00:00     0            140</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt;  7 2019-01-01 06:00:00     0            140</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;  8 2019-01-01 07:00:00     0            140</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;  9 2019-01-01 08:00:00     0            140</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt; 10 2019-01-01 09:00:00     0            140</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt; # … with 9,886 more rows</span></span></code></pre></div>
 </div>
 </div>
 <div id="copyright" class="section level2">

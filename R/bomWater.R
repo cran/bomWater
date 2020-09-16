@@ -43,7 +43,6 @@ make_bom_request <- function(params) {
 
   if (params$request %in% c(
     "getParameterList",
-    "getParameterTypeList",
     "getSiteList",
     "getStationList",
     "getTimeseriesList"
@@ -51,7 +50,6 @@ make_bom_request <- function(params) {
     if (json[1] == "No matches.") {
       stop("No parameter type and station number match found")
     }
-
     colnames(json) <- json[1, ]
     tbl <- dplyr::slice(tibble::as_tibble(json), -1)
   } else if (params$request == "getTimeseriesValues") {
@@ -71,7 +69,7 @@ make_bom_request <- function(params) {
 }
 
 #' @title Retrieve water observation stations
-#'
+#' @md
 #' @description
 #' `get_station_list` queries Water Data Online and returns station details.
 #' Queries can be input with the desired `parameter_type` to find all the
@@ -91,15 +89,72 @@ make_bom_request <- function(params) {
 #' With the default return fields, a tibble with columns station_name,
 #' station_no, station_id, station_latitude, station_longitude.
 #'
+#' @details
+#' Possible return fields for `get_station_list()` are:
+#'
+#' * station_name
+#' * station_longname
+#' * station_no
+#' * station_id
+#' * station_latitude
+#' * station_longitude
+#' * station_carteasting
+#' * station_cartnorthing
+#' * stationparameter_name
+#' * station_georefsystem
+#' * catchment_no
+#' * catchment_id
+#' * catchment_name
+#' * site_no
+#' * site_id
+#' * site_name
+#' * parametertype_id
+#' * parametertype_name
+#' * object_type
+#' * custom_attributes
+#'
 #' @author Alexander Buzacott
 #'
 #' @examples
 #' # Get all Water Course Discharge Stations
+#' \dontrun{
 #' get_station_list()
+#' }
 #' # Just the details for Cotter River at Gingera
+#' \dontrun{
 #' get_station_list(station_number = "410730")
+#' }
 #' # Rainfall stations
+#' \dontrun{
 #' get_station_list(parameter_type = "Rainfall")
+#' }
+#' # Vector of return_fields
+#' return_fields <- c(
+#'   "station_name",
+#'   "station_longname",
+#'   "station_no",
+#'   "station_id",
+#'   "station_latitude",
+#'   "station_longitude",
+#'   "station_carteasting",
+#'   "station_cartnorthing",
+#'   "stationparameter_name",
+#'   "station_georefsystem",
+#'   "catchment_no",
+#'   "catchment_id",
+#'   "catchment_name",
+#'   "site_no",
+#'   "site_id",
+#'   "site_name",
+#'   "parametertype_id",
+#'   "parametertype_name",
+#'   "object_type",
+#'   "custom_attributes"
+#' )
+#' # Get all attributes for one station
+#' \dontrun{
+#' get_station_list("Water Course Discharge", "410730", return_fields)
+#' }
 #' @export
 get_station_list <- function(parameter_type, station_number, return_fields) {
   params <- list("request" = "getStationList")
@@ -127,11 +182,20 @@ get_station_list <- function(parameter_type, station_number, return_fields) {
     ),
     collapse = ","
     )
+  } else {
+    params[["returnfields"]] <- paste(return_fields, collapse = ",")
   }
 
   get_bom_request <- make_bom_request(params)
 
-  return(get_bom_request)
+  # Convert types
+  station_list <- dplyr::mutate_all(
+    get_bom_request,
+    utils::type.convert,
+    as.is = TRUE
+  )
+
+  return(station_list)
 }
 
 #' @title Retrieve the timeseries ID
@@ -186,4 +250,84 @@ get_timeseries_values <- function(ts_id, start_date, end_date, return_fields) {
   get_bom_request <- make_bom_request(params)
 
   return(get_bom_request)
+}
+
+#' @title Retrieve available parameters for stations
+#' @md
+#' @description
+#' `get_parameter_list` returns the parameters that can be retrieved at one or
+#' more stations.
+#' @param station_number A single or multiple vector of AWRC station
+#' numbers.
+#' @param return_fields (Optional) Station parameter details to be returned.
+#' By default the return fields are: station_no, station_id, station_name,
+#' parametertype_id, parametertype_name, parametertype_unitname
+#' parametertype_shortunitname.
+#' @details
+#' The default return fields have been selected to generally return the most
+#' useful fields while reducing duplication of metadata.
+#' The full list of return fields:
+#' * station_no',
+#' * station_id
+#' * station_name
+#' * stationparameter_id
+#' * stationparameter_no
+#' * stationparameter_name
+#' * stationparameter_longname
+#' * site_id
+#' * site_no
+#' * site_name
+#' * parametertype_id
+#' * parametertype_name
+#' * parametertype_longname
+#' * parametertype_unitname
+#' * parametertype_shortunitname
+#' @return
+#' A tibble with columns for each of the return fields.
+#' @examples
+#' # Return parameters for a single station
+#' \dontrun{
+#' get_parameter_list(station_number = "410730")
+#' }
+#' # Return available parameters for multiple stations
+#' \dontrun{
+#' get_parameter_list(station_number = c("410730", "570946"))
+#' }
+#' @export
+get_parameter_list <- function(station_number, return_fields) {
+  params <- list("request" = "getParameterList")
+
+  if (!missing(station_number)) {
+    # Support multiple stations
+    station_number <- paste(station_number, collapse = ",")
+    params[["station_no"]] <- station_number
+  } else {
+    stop("No station number provided")
+  }
+
+  # Set the default return fields
+  if (missing(return_fields)) {
+    params[["returnfields"]] <- paste(c(
+      "station_no",
+      "station_id",
+      "station_name",
+      "parametertype_id",
+      "parametertype_name",
+      "parametertype_unitname",
+      "parametertype_shortunitname"
+    ),
+    collapse = ","
+    )
+  }
+
+  get_bom_request <- make_bom_request(params)
+
+  # Convert types
+  parameter_list <- dplyr::mutate_all(
+    get_bom_request,
+    utils::type.convert,
+    as.is = TRUE
+  )
+
+  return(parameter_list)
 }
